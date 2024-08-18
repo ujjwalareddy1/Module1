@@ -44,18 +44,23 @@ Reverts if the crowdsale is not closed or if the goal was reached.
 1.Deploy the contract:
 
 Crowdfunding crowdfunding = new Crowdfunding(beneficiaryAddress, fundingGoal);
+
 2.Contribute to the campaign:
 
 crowdfunding.contribute{value: 1 ether}();
+
 3.Close the crowdsale:
 
 crowdfunding.closeCrowdsale();
+
 4.Check if the funding goal was reached:
 
 crowdfunding.checkGoalReached();
+
 5.Request a refund (if applicable):
 
 crowdfunding.refund();
+
 ## License
 This project is licensed under the MIT License. See the LICENSE file for details.
 
