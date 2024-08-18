@@ -25,19 +25,19 @@ After the crowdsale is closed, the checkGoalReached function can be called to tr
 If the funding goal was not reached and the crowdsale is closed, contributors can call the refund function to retrieve their contributions.
 
 ## Contract Functions
- constructor(address payable _beneficiary, uint _goal)
+### constructor(address payable _beneficiary, uint _goal)
 Initializes the contract with the beneficiary's address and the funding goal.
-function contribute() public payable
+### function contribute() public payable
 Allows a user to contribute to the campaign.
 Reverts if the crowdsale is closed or if the contribution is zero.
-function closeCrowdsale() public
+### function closeCrowdsale() public
 Closes the crowdsale, preventing further contributions.
 Marks the funding goal as achieved if the goal has been reached.
-function checkGoalReached() public
+### function checkGoalReached() public
 Checks if the funding goal was reached after the crowdsale is closed.
 Transfers the funds to the beneficiary if the goal was met.
 Reverts if the crowdsale is not closed or if the goal was not met.
-function refund() public
+### function refund() public
 Allows contributors to request a refund if the funding goal was not met and the crowdsale is closed.
 Reverts if the crowdsale is not closed or if the goal was reached.
 ### Example Usage
