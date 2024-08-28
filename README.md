@@ -1,66 +1,57 @@
-# Crowdfunding Smart Contract
-This repository contains a simple Crowdfunding smart contract written in Solidity. The contract allows contributors to fund a project until a specified goal is reached. If the goal is not met, contributors can request a refund. The contract does not impose any time duration or minimum/maximum contribution limits.
+# SafeNumberStorage Contract
+The SafeNumberStorage contract is a simple smart contract written in Solidity that allows users to store, retrieve, and reset a number on the Ethereum blockchain. The contract includes basic error-handling mechanisms using require(), assert(), and revert() statements.
 
 ## Features
-Contribution Tracking: Allows multiple users to contribute funds to the project.
-Goal Validation: Checks if the funding goal has been reached.
-Manual Crowdsale Closure: The crowdsale can be manually closed by calling a specific function.
-Refund Mechanism: If the goal is not reached, contributors can withdraw their contributions.
-## How It Works
-1. Contract Deployment
-The contract is deployed with two parameters:
+Store a Number: Any user can store a positive number in the contract.
+Retrieve the Stored Number: Any user can retrieve the stored number.
+Reset the Stored Number: Only the contract owner can reset the stored number to zero.
+Force Revert: A function that demonstrates how to explicitly revert a transaction.
 
-beneficiary: The address that will receive the funds if the goal is met.
-goal: The amount of ether required to consider the crowdfunding campaign successful.
-2. Contributing to the Campaign
-Anyone can contribute to the campaign by calling the contribute function and sending Ether to the contract. Contributions are tracked on a per-address basis.
+## FUNCTIONS
+### constructor()
+Description: The constructor function is executed once when the contract is deployed. It sets the owner of the contract to the address that deployed it.
+Access Control: Only executed once at deployment.
+### storeNumber(uint _number)
+Description: Allows a user to store a positive number in the contract.
+Parameters:
+### _number: The number to be stored.
+Validation:
+Uses require() to ensure that the number is greater than 0.
+Usage:
+Example: storeNumber(5);
+### retrieveNumber()
+Description: Allows any user to retrieve the currently stored number.
+Returns:
+The number currently stored in the contract.
+Usage:
+Example: uint myNumber = retrieveNumber();
+### resetNumber()
+Description: Allows the contract owner to reset the stored number to zero.
+Validation:
+Uses require() to ensure that only the contract owner can call this function.
+Uses assert() to ensure that the stored number has been successfully reset to zero.
+Usage:
+Example: resetNumber();
+### forceRevert()
+Description: A function that always reverts the transaction, showcasing how to explicitly trigger a revert.
+Usage:
+Example: forceRevert();
 
-3. Closing the Crowdsale
-Once the campaign is ready to be closed, the closeCrowdsale function can be called to prevent further contributions. If the funding goal has been reached, the contract marks the goal as achieved.
+## Error Handling
+### require(condition, errorMessage):
+Ensures that a specific condition is met before proceeding with the function. If the condition is not met, the transaction is reverted, and the provided error message is returned.
+Example: require(_number > 0, "Number must be greater than 0.");
+### assert(condition):
 
-4. Checking the Funding Goal
-After the crowdsale is closed, the checkGoalReached function can be called to transfer the funds to the beneficiary if the goal was met. This function can only be called after the crowdsale is closed.
+Used for conditions that should never fail during normal execution. If the condition fails, it indicates a critical bug, and the transaction is reverted.
+Example: assert(storedNumber == 0);
+### revert(errorMessage):
 
-5. Requesting a Refund
-If the funding goal was not reached and the crowdsale is closed, contributors can call the refund function to retrieve their contributions.
-
-## Contract Functions
-### constructor(address payable _beneficiary, uint _goal)
-Initializes the contract with the beneficiary's address and the funding goal.
-### function contribute() public payable
-Allows a user to contribute to the campaign.
-Reverts if the crowdsale is closed or if the contribution is zero.
-### function closeCrowdsale() public
-Closes the crowdsale, preventing further contributions.
-Marks the funding goal as achieved if the goal has been reached.
-### function checkGoalReached() public
-Checks if the funding goal was reached after the crowdsale is closed.
-Transfers the funds to the beneficiary if the goal was met.
-Reverts if the crowdsale is not closed or if the goal was not met.
-### function refund() public
-Allows contributors to request a refund if the funding goal was not met and the crowdsale is closed.
-Reverts if the crowdsale is not closed or if the goal was reached.
-### Example Usage
-1.Deploy the contract:
-
-Crowdfunding crowdfunding = new Crowdfunding(beneficiaryAddress, fundingGoal);
-
-2.Contribute to the campaign:
-
-crowdfunding.contribute{value: 1 ether}();
-
-3.Close the crowdsale:
-
-crowdfunding.closeCrowdsale();
-
-4.Check if the funding goal was reached:
-
-crowdfunding.checkGoalReached();
-
-5.Request a refund (if applicable):
-
-crowdfunding.refund();
+Explicitly reverts the transaction, returning an error message.
+Example: revert("This function always reverts.");
 
 ## License
 This project is licensed under the MIT License. See the LICENSE file for details.
-
+## Contact
+Email - ujjwala622@gmail.com
+Name - Ujjwala
